@@ -17,12 +17,14 @@ B-дерево организовано таким образом, чтобы м
 ### CPU flamegraph.
 ![cpu_btree.png](png/cpu_btree.png)
 
-CPU flamegraph при построении дерева. 
+CPU flamegraph при построении дерева.  
+Основной процесс начинается с btree.BTreeExample.main, который вызывает методы btree.BTree.insert и btree.BTree.saveNode. Основное потребление CPU связано с методами java.io.ObjectOutputStream.writeObject, java.io.ObjectOutputStream.writeSerialData и java.io.ObjectOutputStream.writeArray, что указывает на высокую нагрузку из-за сериализации данных.
 
 ### Allocation flamegraph.
 ![alloc_btree.png](png/alloc_btree.png)
 
-Allocation flamegraph при построении дерева
+Allocation flamegraph при построении дерева.  "
+Методы java.io.ObjectOutputStream занимают большую часть профиля, что указывает на высокую нагрузку при сериализации объектов. Это связано с тем, что методы btree.BTree.saveNode и btree.BTree.insert вызывают сериализацию
 
 
 # Вывод
