@@ -79,7 +79,7 @@ class BTreeNode implements Serializable {
             i++;
         }
 
-        if (keys[i] == key) {
+        if (i < keyCount && keys[i] == key) {
             return this;
         }
 
@@ -87,8 +87,13 @@ class BTreeNode implements Serializable {
             return null;
         }
 
+        if (i >= children.length) {
+            return null;
+        }
+
         return children[i].search(key);
     }
+
 
     public void traverse() {
         int i;
